@@ -61,6 +61,7 @@ def get_resume_from_artifact():
     _r = requests.get(url, headers=headers)
 
     # Get the latest artifact
+    print(_r.json())
     artifact = _r.json()['artifacts'][0]
     response = requests.get(
         artifact['archive_download_url'], headers=headers, stream=True)
