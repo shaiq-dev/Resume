@@ -1,0 +1,7 @@
+.env
+env
+store
+*.zip
+*.pdf
+__pycache__
+*.pyc
