@@ -36,7 +36,7 @@ class ResumeExtractor:
 
     def _get_pdf_version(self):
         with open(_j(self._store_path, 'version.txt'), 'r') as f:
-            return f.read()[:-2]
+            return f.read()[:-1]
 
     def get_pdf(self):
         self._write_and_extract_zip()
