@@ -10,6 +10,8 @@
       const _d = new Date();
       const _v = ` ${_d.getFullYear()}.${_d.getMonth() + 1}.${data.version}`;
       _("#version").innerHTML = _v;
+      // Remove Preloader
+      _("#preloader").classList.add("hide");
     });
 
   _("#download-resume").addEventListener("click", () => {
