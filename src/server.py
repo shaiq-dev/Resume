@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from .functions import get_resume_from_artifact
+from functions import get_resume_from_artifact
 
 # Load all the environment variables from .env
 load_dotenv()
