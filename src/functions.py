@@ -18,6 +18,7 @@ class ResumeExtractor:
         self._store_path = _j(root, 'store', str(id))
 
     def _write_and_extract_zip(self):
+        # Write the zip only if it doesn't exist.
         if not os.path.exists(self._store_path):
             os.makedirs(self._store_path)
             file = _j(self._store_path, f'{self.filename}.zip')
@@ -60,8 +61,15 @@ def get_resume_from_artifact():
     url = f"https://api.github.com/repos/{owner}/{repo}/actions/artifacts"
     _r = requests.get(url, headers=headers)
 
-    # Get the latest artifact
-    artifact = _r.json()['artifacts'][0]
+    # The artifact we require from github
+    artifact_name = "ResumeShaiqKar"
+    # The api will return all the artifacts including the ones from github pages
+    # We need to filter out the ones that are not the artifact we want.
+    artifacts = [a for a in _r.json()['artifacts'] if a['name']
+                 == artifact_name]
+    #  Sort the filtered artifacts to get the latest one
+    artifacts.sort(key=lambda item: item['created_at'], reverse=True)
+    artifact = artifacts[0]
     response = requests.get(
         artifact['archive_download_url'], headers=headers, stream=True)
 
